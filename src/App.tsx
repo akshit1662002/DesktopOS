@@ -16,7 +16,10 @@ export default function App() {
           className="absolute inset-0 w-full h-full object-cover"
           style={{ zIndex: 0 }}
         >
-         <source src="/bg-web.mp4" type="video/mp4" />
+         <source
+    src="https://res.cloudinary.com/dhmfxif9q/video/upload/v1773346321/bg-web_ifdeou.mp4"
+    type="video/mp4"
+  />
         </video>
 
         {/* Dark overlay */}
