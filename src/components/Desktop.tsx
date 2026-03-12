@@ -7,12 +7,12 @@ import Contact from "../apps/Contact";
 import Terminal from "../apps/Terminal";
 
 const desktopApps = [
-  { title: "About Me",    icon: "👤", color: "from-purple-500 to-pink-500",   component: <AboutMe /> },
-  { title: "Experience",  icon: "💼", color: "from-blue-500 to-cyan-500",     component: <Experience /> },
-  { title: "Projects",    icon: "📁", color: "from-orange-500 to-yellow-500", component: <Projects /> },
-  { title: "Skills",      icon: "⚡", color: "from-green-500 to-emerald-500", component: <Skills /> },
-  { title: "Contact",     icon: "📬", color: "from-pink-500 to-rose-500",     component: <Contact /> },
-  { title: "Terminal",    icon: "🖥️", color: "from-gray-600 to-gray-800",     component: <Terminal /> },
+  { title: "About Me",   icon: "👤", component: <AboutMe /> },
+  { title: "Experience", icon: "💼", component: <Experience /> },
+  { title: "Projects",   icon: "📁", component: <Projects /> },
+  { title: "Skills",     icon: "⚡", component: <Skills /> },
+  { title: "Contact",    icon: "📬", component: <Contact /> },
+  { title: "Terminal",   icon: "🖥️", component: <Terminal /> },
 ];
 
 export default function Desktop() {
@@ -33,10 +33,20 @@ export default function Desktop() {
           }
           className="flex flex-col items-center gap-1.5 cursor-pointer select-none group w-16"
         >
-          {/* Folder Icon */}
-          <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${app.color} flex items-center justify-center text-2xl shadow-lg group-hover:scale-110 transition-transform duration-150`}>
-            {app.icon}
+          {/* macOS Folder Icon */}
+          <div className="relative w-14 h-14 group-hover:scale-110 transition-transform duration-150">
+            <img
+              src="/folder.png"
+              alt="folder"
+              className="w-full h-full object-contain drop-shadow-lg"
+            />
+            {/* Emoji badge bottom-right */}
+            <span className="absolute -bottom-1 -right-1 text-lg leading-none">
+              {app.icon}
+            </span>
           </div>
+
+          {/* Label */}
           <span className="text-xs text-white/80 text-center leading-tight drop-shadow">
             {app.title}
           </span>
