@@ -1,27 +1,21 @@
-// src/components/AppWindow.tsx
 import { motion } from "framer-motion";
 import { useApp } from "../context/AppContext";
 import { useResize } from "../hooks/useResize";
+import type { ReactNode } from "react";
 
 type Props = {
   id: string;
   title: string;
-  children: React.ReactNode;
+  icon: string;
+  children: ReactNode;
   position: { x: number; y: number };
   zIndex: number;
   minimized: boolean;
 };
 
-export default function AppWindow({
-  id,
-  title,
-  children,
-  position,
-  zIndex,
-  minimized,
-}: Props) {
+export default function AppWindow({ id, title, icon, children, position, zIndex, minimized }: Props) {
   const { closeWindow, focusWindow, minimizeWindow } = useApp();
-  const { size, onResizeMouseDown } = useResize(480, 320);
+  const { size, onResizeMouseDown } = useResize(560, 400);
 
   if (minimized) return null;
 
@@ -29,37 +23,43 @@ export default function AppWindow({
     <motion.div
       drag
       dragMomentum={false}
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.9 }}
+      initial={{ opacity: 0, scale: 0.92, y: 20 }}
+      animate={{ opacity: 1, scale: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.92, y: 20 }}
       style={{ x: position.x, y: position.y, zIndex, width: size.width }}
       onMouseDown={() => focusWindow(id)}
-      className="absolute bg-white rounded-xl shadow-2xl border border-gray-200 overflow-hidden"
+      className="absolute rounded-xl overflow-hidden shadow-2xl border border-white/10"
+      style2={{ backdropFilter: "blur(20px)" }}
     >
-      {/* Title Bar — this drives the drag */}
-      <div className="flex items-center gap-2 px-3 py-2 bg-gray-100 border-b border-gray-200 cursor-move select-none">
+      {/* Title Bar */}
+      <div
+        className="flex items-center gap-2 px-4 py-3 cursor-move select-none"
+        style={{ background: "rgba(40,40,50,0.95)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+      >
         <button
           onPointerDown={(e) => e.stopPropagation()}
           onClick={() => closeWindow(id)}
-          className="w-3 h-3 rounded-full bg-red-400 hover:bg-red-500 transition-colors"
+          className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-400 transition-colors"
         />
         <button
           onPointerDown={(e) => e.stopPropagation()}
           onClick={() => minimizeWindow(id)}
-          className="w-3 h-3 rounded-full bg-yellow-400 hover:bg-yellow-500 transition-colors"
+          className="w-3 h-3 rounded-full bg-yellow-500 hover:bg-yellow-400 transition-colors"
         />
         <button
           onPointerDown={(e) => e.stopPropagation()}
-          className="w-3 h-3 rounded-full bg-green-400 hover:bg-green-500 transition-colors"
+          className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-400 transition-colors"
         />
-        <span className="ml-2 text-sm font-medium text-gray-600">{title}</span>
+        <span className="ml-3 text-sm font-medium text-white/70 flex items-center gap-1.5">
+          <span>{icon}</span> {title}
+        </span>
       </div>
 
-      {/* Content — stop drag from firing inside here */}
+      {/* Content */}
       <motion.div
         onPointerDown={(e) => e.stopPropagation()}
-        className="overflow-auto p-4"
-        style={{ height: size.height }}
+        className="overflow-auto"
+        style={{ height: size.height, background: "rgba(18,18,24,0.97)" }}
       >
         {children}
       </motion.div>
@@ -68,11 +68,8 @@ export default function AppWindow({
       <div
         onMouseDown={onResizeMouseDown}
         onPointerDown={(e) => e.stopPropagation()}
-        className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
-        style={{
-          background: "linear-gradient(135deg, transparent 50%, #aaa 50%)",
-          borderBottomRightRadius: "0.75rem",
-        }}
+        className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize opacity-40 hover:opacity-80"
+        style={{ background: "linear-gradient(135deg, transparent 50%, #aaa 50%)", borderBottomRightRadius: "0.75rem" }}
       />
     </motion.div>
   );

@@ -1,29 +1,27 @@
 import { useState, useCallback } from "react";
 
-export function useResize(initialWidth = 480, initialHeight = 320) {
+export function useResize(initialWidth = 560, initialHeight = 400) {
   const [size, setSize] = useState({ width: initialWidth, height: initialHeight });
 
   const onResizeMouseDown = useCallback(
     (e: React.MouseEvent) => {
       e.preventDefault();
       e.stopPropagation();
-
       const startX = e.clientX;
       const startY = e.clientY;
       const startW = size.width;
       const startH = size.height;
 
-      const onMouseMove = (moveEvent: MouseEvent) => {
-        const newWidth = Math.max(280, startW + (moveEvent.clientX - startX));
-        const newHeight = Math.max(200, startH + (moveEvent.clientY - startY));
-        setSize({ width: newWidth, height: newHeight });
+      const onMouseMove = (ev: MouseEvent) => {
+        setSize({
+          width: Math.max(320, startW + (ev.clientX - startX)),
+          height: Math.max(240, startH + (ev.clientY - startY)),
+        });
       };
-
       const onMouseUp = () => {
         window.removeEventListener("mousemove", onMouseMove);
         window.removeEventListener("mouseup", onMouseUp);
       };
-
       window.addEventListener("mousemove", onMouseMove);
       window.addEventListener("mouseup", onMouseUp);
     },

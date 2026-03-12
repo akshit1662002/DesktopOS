@@ -23,17 +23,11 @@ const AppContext = createContext<AppContextType | null>(null);
 export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [windows, setWindows] = useState<AppWindow[]>([]);
 
-  const openWindow = (win: Omit<AppWindow, "id" | "zIndex" | "minimized">) => {
+  const openWindow = (win: Omit<AppWindow, "id" | "zIndex" | "minimized">) =>
     setWindows((prev) => [
       ...prev,
-      {
-        ...win,
-        id: crypto.randomUUID(),
-        zIndex: prev.length + 1,
-        minimized: false,
-      },
+      { ...win, id: crypto.randomUUID(), zIndex: prev.length + 1, minimized: false },
     ]);
-  };
 
   const closeWindow = (id: string) =>
     setWindows((prev) => prev.filter((w) => w.id !== id));
@@ -50,9 +44,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     );
 
   return (
-    <AppContext.Provider
-      value={{ windows, openWindow, closeWindow, focusWindow, minimizeWindow }}
-    >
+    <AppContext.Provider value={{ windows, openWindow, closeWindow, focusWindow, minimizeWindow }}>
       {children}
     </AppContext.Provider>
   );
