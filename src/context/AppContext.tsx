@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 export type AppWindow = {
   id: string;
   title: string;
+  icon: string;   
   component: ReactNode;
   position: { x: number; y: number };
   zIndex: number;

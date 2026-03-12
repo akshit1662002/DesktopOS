@@ -3,7 +3,7 @@ import { useMemo } from "react";
 export default function CalendarWidget() {
   const today = new Date();
   const month = today.toLocaleString("en-US", { month: "long" }).toUpperCase();
-  const year = today.getFullYear();
+//   const year = today.getFullYear();
   const currentDate = today.getDate();
   const currentMonth = today.getMonth();
   const currentYear = today.getFullYear();

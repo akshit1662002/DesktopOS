@@ -20,17 +20,22 @@ export default function AppWindow({ id, title, icon, children, position, zIndex,
   if (minimized) return null;
 
   return (
-    <motion.div
-      drag
-      dragMomentum={false}
-      initial={{ opacity: 0, scale: 0.92, y: 20 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      exit={{ opacity: 0, scale: 0.92, y: 20 }}
-      style={{ x: position.x, y: position.y, zIndex, width: size.width }}
-      onMouseDown={() => focusWindow(id)}
-      className="absolute rounded-xl overflow-hidden shadow-2xl border border-white/10"
-      style2={{ backdropFilter: "blur(20px)" }}
-    >
+<motion.div
+  drag
+  dragMomentum={false}
+  initial={{ opacity: 0, scale: 0.92, y: 20 }}
+  animate={{ opacity: 1, scale: 1, y: 0 }}
+  exit={{ opacity: 0, scale: 0.92, y: 20 }}
+  onMouseDown={() => focusWindow(id)}
+  style={{
+    x: position.x,
+    y: position.y,
+    zIndex,
+    width: size.width,
+    backdropFilter: "blur(20px)",   // 👈 moved here, removed style2
+  }}
+  className="absolute rounded-xl overflow-hidden shadow-2xl border border-white/10"
+>
       {/* Title Bar */}
       <div
         className="flex items-center gap-2 px-4 py-3 cursor-move select-none"
