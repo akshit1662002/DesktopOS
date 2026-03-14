@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-export function useResize(initialWidth = 760, initialHeight = 600) {
+export function useResize(initialWidth = 700, initialHeight = 600) {
   const [size, setSize] = useState({
     width: initialWidth,
     height: initialHeight,

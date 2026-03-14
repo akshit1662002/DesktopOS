@@ -23,7 +23,7 @@ export default function AppWindow({
   minimized,
 }: Props) {
   const { closeWindow, focusWindow, minimizeWindow } = useApp();
-  const { size, onResizeMouseDown } = useResize(560, 500);
+  const { size, onResizeMouseDown } = useResize(700, 600);
 
   if (minimized) return null;
 
