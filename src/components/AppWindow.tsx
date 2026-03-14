@@ -39,7 +39,7 @@ export default function AppWindow({
         position: "fixed",
         top: position.y,
         left: position.x,
-        zIndex: 1000,
+        zIndex,
         width: size.width,
         backdropFilter: "blur(20px)",
       }}

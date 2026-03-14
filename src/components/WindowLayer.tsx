@@ -7,7 +7,7 @@ export default function WindowLayer() {
   return (
     <AnimatePresence>
       {windows.map((win: any) => (
-        <AppWindow key={win.id} {...win}>
+        <AppWindow key={win.id} {...win} zIndex={1000}>
           {win.component}
         </AppWindow>
       ))}
