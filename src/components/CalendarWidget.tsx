@@ -19,14 +19,14 @@ export default function CalendarWidget() {
     return result;
   }, [currentMonth, currentYear]);
 
-  return (
+return (
     <div
       style={{
         width: 220,
-        background: "rgba(40,40,44,0.88)",
+        background: "#ffffff",          // 👈 solid white
         backdropFilter: "blur(20px)",
         borderRadius: 24,
-        boxShadow: "0 8px 32px rgba(0,0,0,0.4)",
+        boxShadow: "0 8px 32px rgba(0,0,0,0.15)",
         padding: "14px 16px",
       }}
     >
@@ -44,7 +44,7 @@ export default function CalendarWidget() {
           <div
             key={i}
             className="text-center font-semibold"
-            style={{ fontSize: 11, color: "rgba(255,255,255,0.45)" }}
+            style={{ fontSize: 11, color: "rgba(0,0,0,0.35)" }}  // 👈 dark muted
           >
             {d}
           </div>
@@ -60,12 +60,9 @@ export default function CalendarWidget() {
                 className="flex items-center justify-center w-6 h-6 rounded-full"
                 style={{
                   fontSize: 12,
-                  fontWeight: day === currentDate ? 700 : 400,
+                  fontWeight: day === currentDate ? 700 : 500,
                   background: day === currentDate ? "#e8574a" : "transparent",
-                  color:
-                    day === currentDate
-                      ? "#fff"
-                      : "rgba(255,255,255,0.85)",
+                  color: day === currentDate ? "#fff" : "rgba(0,0,0,0.85)",  // 👈 dark text
                 }}
               >
                 {day}
@@ -76,4 +73,5 @@ export default function CalendarWidget() {
       </div>
     </div>
   );
+
 }

@@ -20,7 +20,7 @@ export default function Clock() {
   });
 
   return (
-    <div className="fixed top-4 right-4 z-[9998] select-none">
+    <div className="fixed top-12 right-4 z-[9998] select-none">
       <div
         className="relative flex items-center justify-center"
         style={{
@@ -52,7 +52,9 @@ export default function Clock() {
                 width: tick.isMajor ? 2.5 : 1.5,
                 height: tick.isMajor ? 10 : 7,
                 borderRadius: 999,
-                background: tick.isMajor ? "rgba(0,0,0,0.5)" : "rgba(0,0,0,0.25)",
+                background: tick.isMajor
+                  ? "rgba(0,0,0,0.5)"
+                  : "rgba(0,0,0,0.25)",
               }}
             />
           </div>

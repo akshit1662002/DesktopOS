@@ -13,33 +13,45 @@ type Props = {
   minimized: boolean;
 };
 
-export default function AppWindow({ id, title, icon, children, position, zIndex, minimized }: Props) {
+export default function AppWindow({
+  id,
+  title,
+  icon,
+  children,
+  position,
+  zIndex,
+  minimized,
+}: Props) {
   const { closeWindow, focusWindow, minimizeWindow } = useApp();
   const { size, onResizeMouseDown } = useResize(560, 400);
 
   if (minimized) return null;
 
   return (
-<motion.div
-  drag
-  dragMomentum={false}
-  initial={{ opacity: 0, scale: 0.92, y: 20 }}
-  animate={{ opacity: 1, scale: 1, y: 0 }}
-  exit={{ opacity: 0, scale: 0.92, y: 20 }}
-  onMouseDown={() => focusWindow(id)}
-  style={{
-    x: position.x,
-    y: position.y,
-    zIndex,
-    width: size.width,
-    backdropFilter: "blur(20px)",   // 👈 moved here, removed style2
-  }}
-  className="absolute rounded-xl overflow-hidden shadow-2xl border border-white/10"
->
+    <motion.div
+      drag
+      dragMomentum={false}
+      initial={{ opacity: 0, scale: 0.92 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0, scale: 0.92 }}
+      onMouseDown={() => focusWindow(id)}
+      style={{
+        position: "fixed", // fixed instead of absolute
+        top: position.y, // use top/left
+        left: position.x, // instead of x/y
+        zIndex,
+        width: size.width,
+        backdropFilter: "blur(20px)",
+      }}
+      className="rounded-xl overflow-hidden shadow-2xl border border-white/10"
+    >
       {/* Title Bar */}
       <div
         className="flex items-center gap-2 px-4 py-3 cursor-move select-none"
-        style={{ background: "rgba(40,40,50,0.95)", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+        style={{
+          background: "rgba(40,40,50,0.95)",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
+        }}
       >
         <button
           onPointerDown={(e) => e.stopPropagation()}
@@ -74,7 +86,10 @@ export default function AppWindow({ id, title, icon, children, position, zIndex,
         onMouseDown={onResizeMouseDown}
         onPointerDown={(e) => e.stopPropagation()}
         className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize opacity-40 hover:opacity-80"
-        style={{ background: "linear-gradient(135deg, transparent 50%, #aaa 50%)", borderBottomRightRadius: "0.75rem" }}
+        style={{
+          background: "linear-gradient(135deg, transparent 50%, #aaa 50%)",
+          borderBottomRightRadius: "0.75rem",
+        }}
       />
     </motion.div>
   );
