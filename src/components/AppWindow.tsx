@@ -23,7 +23,7 @@ export default function AppWindow({
   minimized,
 }: Props) {
   const { closeWindow, focusWindow, minimizeWindow } = useApp();
-  const { size, onResizeMouseDown } = useResize(560, 400);
+  const { size, onResizeMouseDown } = useResize(560, 500);
 
   if (minimized) return null;
 
@@ -36,10 +36,10 @@ export default function AppWindow({
       exit={{ opacity: 0, scale: 0.92 }}
       onMouseDown={() => focusWindow(id)}
       style={{
-        position: "fixed", // fixed instead of absolute
-        top: position.y, // use top/left
-        left: position.x, // instead of x/y
-        zIndex,
+        position: "fixed",
+        top: position.y,
+        left: position.x,
+        zIndex: 1000,
         width: size.width,
         backdropFilter: "blur(20px)",
       }}

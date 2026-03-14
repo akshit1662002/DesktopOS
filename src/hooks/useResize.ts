@@ -1,7 +1,10 @@
 import { useState, useCallback } from "react";
 
-export function useResize(initialWidth = 560, initialHeight = 400) {
-  const [size, setSize] = useState({ width: initialWidth, height: initialHeight });
+export function useResize(initialWidth = 760, initialHeight = 600) {
+  const [size, setSize] = useState({
+    width: initialWidth,
+    height: initialHeight,
+  });
 
   const onResizeMouseDown = useCallback(
     (e: React.MouseEvent) => {
@@ -25,7 +28,7 @@ export function useResize(initialWidth = 560, initialHeight = 400) {
       window.addEventListener("mousemove", onMouseMove);
       window.addEventListener("mouseup", onMouseUp);
     },
-    [size]
+    [size],
   );
 
   return { size, onResizeMouseDown };

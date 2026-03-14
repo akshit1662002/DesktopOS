@@ -37,7 +37,7 @@ export default function MenuBar() {
       {/* Left — Apple logo + menu items */}
       <div className="flex items-center gap-4">
         {/* Apple logo */}
-        <img src="/apple-logo.png" alt="logo" className="h-4 w-4 " />
+        <img src="/apple-logo.png" alt="logo" className="h-6 w-6 " />
 
         {/* Menu items */}
         {["Finder", "File", "Edit", "View", "Go", "Window", "Help"].map(

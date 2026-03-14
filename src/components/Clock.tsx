@@ -20,7 +20,12 @@ export default function Clock() {
   });
 
   return (
-    <div className="fixed top-12 right-4 z-[9998] select-none">
+    <div
+      className="fixed top-12 right-4 select-none"
+      style={{
+        zIndex: 100,
+      }}
+    >
       <div
         className="relative flex items-center justify-center"
         style={{

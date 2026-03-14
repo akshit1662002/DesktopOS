@@ -32,7 +32,7 @@ export default function App() {
         {/* Widgets — top right */}
         <div
           className="fixed flex items-start gap-3 "
-          style={{ top: 50, right: 190, zIndex: 9998 }}
+          style={{ top: 50, right: 190, zIndex: 2 }}
         >
           <CalendarWidget />
           <Clock />
