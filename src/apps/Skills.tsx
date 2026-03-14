@@ -1,34 +1,159 @@
-import { portfolio } from "../data/portfolio";
-
-const categoryColors: Record<string, string> = {
-  Frontend: "from-purple-500/20 to-pink-500/20 border-purple-500/30",
-  Backend: "from-blue-500/20 to-cyan-500/20 border-blue-500/30",
-  Styling: "from-pink-500/20 to-rose-500/20 border-pink-500/30",
-  "State Management": "from-yellow-500/20 to-orange-500/20 border-yellow-500/30",
-  "Forms & Validation": "from-green-500/20 to-emerald-500/20 border-green-500/30",
-  Databases: "from-red-500/20 to-orange-500/20 border-red-500/30",
-  ORM: "from-indigo-500/20 to-purple-500/20 border-indigo-500/30",
-  Tools: "from-gray-500/20 to-slate-500/20 border-gray-500/30",
-};
-
 export default function Skills() {
+  const skillCategories = [
+    {
+      title: "Languages",
+      skills: ["JavaScript (ES6+)", "TypeScript", "HTML5", "CSS3", "MySQL"]
+    },
+    {
+      title: "Frameworks & Libraries",
+      skills: ["React.js", "Redux Toolkit", "React Router", "Tailwind CSS", "Bootstrap"]
+    },
+    {
+      title: "Backend",
+      skills: ["Node.js", "Express.js", "REST APIs"]
+    },
+    {
+      title: "Databases",
+      skills: ["PostgreSQL", "MongoDB"]
+    },
+    {
+      title: "Tools & Others",
+      skills: ["Git", "GitHub", "Prisma ORM", "VS Code"]
+    }
+  ];
+
   return (
-    <div className="p-6 space-y-4 text-white/80">
-      {Object.entries(portfolio.skills).map(([category, skills]) => (
-        <div key={category}>
-          <p className="text-xs text-white/40 uppercase tracking-widest mb-2">{category}</p>
-          <div className="flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <span
-                key={skill}
-                className={`text-sm px-3 py-1 rounded-lg border bg-gradient-to-r ${categoryColors[category] ?? "from-white/5 to-white/5 border-white/10"} text-white/80`}
-              >
-                {skill}
-              </span>
-            ))}
-          </div>
+    <>
+      <style>{`
+        .skills-container {
+            --text-primary: #ffffff;
+            --text-secondary: rgba(235, 235, 245, 0.6);
+            --text-tertiary: rgba(235, 235, 245, 0.3);
+            --accent-color: #0A84FF;
+            color: var(--text-primary);
+            padding: 40px;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .skills-header {
+            margin-bottom: 40px;
+        }
+
+        .skills-kicker {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-tertiary);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .skills-title {
+            font-size: 32px;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.7) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .skill-group-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .skill-group-card:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
+            border-color: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15), inset 0 1px 0 rgba(255,255,255,0.05);
+        }
+
+        .skill-group-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .skill-group-title::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            box-shadow: 0 0 10px rgba(10, 132, 255, 0.6);
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .skill-tag {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            padding: 6px 14px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            letter-spacing: 0.01em;
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            background: rgba(10, 132, 255, 0.15);
+            border-color: rgba(10, 132, 255, 0.3);
+            color: #ffffff;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(10, 132, 255, 0.1);
+        }
+      `}</style>
+      <div className="skills-container">
+        
+        <div className="skills-header">
+            <h4 className="skills-kicker">Expertise</h4>
+            <h1 className="skills-title">Technical Skills</h1>
         </div>
-      ))}
-    </div>
+
+        <div className="skills-grid">
+            {skillCategories.map((group, index) => (
+                <div key={index} className="skill-group-card">
+                    <h3 className="skill-group-title">{group.title}</h3>
+                    <div className="skill-tags">
+                        {group.skills.map((skill, i) => (
+                            <span key={i} className="skill-tag">
+                                {skill}
+                            </span>
+                        ))}
+                    </div>
+                </div>
+            ))}
+        </div>
+
+      </div>
+    </>
   );
 }

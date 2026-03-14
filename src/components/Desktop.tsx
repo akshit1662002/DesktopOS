@@ -60,17 +60,21 @@ export default function Desktop() {
       {desktopApps.map((app) => (
         <div
           key={app.title}
-          onClick={() =>
+          onClick={() => {
+            // Actual initial window width is 700px and height is 640px (600 content + 40 header)
+            // We want to center it perfectly in the viewport.
+            const winWidth = 700;
+            const winHeight = 640;
             openWindow({
               title: app.title,
               icon: app.icon,
               component: app.component,
               position: {
-                x: window.innerWidth / 2 - 280, // 280 = half of window width (560)
-                y: window.innerHeight / 2 - 220, // 220 = half of window height (440)
+                x: (window.innerWidth / 2) - (winWidth / 2),
+                y: (window.innerHeight / 2) - (winHeight / 2),
               },
             })
-          }
+          }}
           className="flex flex-col items-center gap-1.5 cursor-pointer select-none group w-16"
         >
           <div className="relative w-14 h-14 group-hover:scale-110 transition-transform duration-150">
