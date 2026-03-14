@@ -47,10 +47,11 @@ export default function AppWindow({
     >
       {/* Title Bar */}
       <div
-        className="flex items-center gap-2 px-4 py-3 cursor-move select-none"
+        className="flex items-center gap-2 px-4 py-3 h-10 cursor-move select-none  pl-4"
         style={{
           background: "rgba(40,40,50,0.95)",
           borderBottom: "1px solid rgba(255,255,255,0.08)",
+          paddingLeft: "12px",
         }}
       >
         <button
