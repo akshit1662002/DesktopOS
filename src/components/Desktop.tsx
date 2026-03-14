@@ -57,7 +57,7 @@ export default function Desktop() {
       className="flex flex-col gap-6"
       style={{ paddingTop: "40px", paddingLeft: "40px" }}
     >
-      {desktopApps.map((app, i) => (
+      {desktopApps.map((app) => (
         <div
           key={app.title}
           onClick={() =>
