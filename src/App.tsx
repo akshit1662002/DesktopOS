@@ -4,6 +4,7 @@ import WindowLayer from "./components/WindowLayer";
 import Clock from "./components/Clock";
 import CalendarWidget from "./components/CalendarWidget";
 import MenuBar from "./components/MenuBar";
+import Dock from "./components/Dock";
 
 export default function App() {
   return (
@@ -41,7 +42,7 @@ export default function App() {
         <div className="relative" style={{ zIndex: 3 }}>
           <Desktop />
           <WindowLayer />
-          {/* <Taskbar /> */}
+          <Dock />
         </div>
       </div>
     </AppProvider>
